@@ -4,12 +4,14 @@ from django.db import models
 class Post(models.Model):
   title = models.CharField(max_length=250) 
   body = models.TextField()
-
+  tag = models.ManyToManyField('Tag', blank=True)
 
   # Model Instance 대표 출력 값
   def __str__(self):
     return self.title
   
+
+
 
 # 1:N 관계 (하나의 Post -> 여러 Comment)
 class Comment(models.Model):
@@ -19,6 +21,19 @@ class Comment(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)
+
+
+
+
+
+
+
+# N:M 관계 (여러 Post -> 여러 Tag)  //  (여러 Tag -> 여러 Post)
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 
