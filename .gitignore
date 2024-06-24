@@ -1,1 +1,6 @@
+# 가상 환경
 .venv311
+
+
+__pycache__/
+db.sqlite3
