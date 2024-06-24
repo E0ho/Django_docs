@@ -13,6 +13,6 @@
   </form>
 
   {% for post in posts %}
-    <a href="#">{{ post.title }}</a><br />
+    <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a><br />
   {% endfor %}
 {% endblock %}

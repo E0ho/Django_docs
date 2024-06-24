@@ -12,4 +12,7 @@ def index(request):
 
 # URL 변수 활용
 def detail(request, id):
-    return HttpResponse(id)
+    post = get_object_or_404(Post, id = id)
+
+    context = {'post' : post}
+    return render(request, 'blog/detail.html', context)
