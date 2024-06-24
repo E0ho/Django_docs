@@ -19,3 +19,22 @@ class Comment(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.BooleanField(default=False)
+
+
+
+
+
+
+
+# 1:1 관계 (하나의 User -> 하나의 Profile)
+class User(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+# 1:1 관계 (하나의 User -> 하나의 Profile)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=20)
+    address = models.CharField(max_length=50)
