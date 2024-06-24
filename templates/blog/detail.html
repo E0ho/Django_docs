@@ -11,22 +11,23 @@
   내용 : {{ post.body }} <br />
   <hr />
 
-  {% comment %} <p>댓글</p>
-  {% for comment in comment_all %}
+  <p>댓글</p>
+  {% for comment in comments %}
     <p>{{ comment.message }}/{{ comment.author }}/{{ comment.updated }}</p>
   {% empty %}
     댓글이 존재하지 않습니다.
   {% endfor %}
   <hr />
 
-  <p>태그</p>
+  {% comment %} <p>태그</p>
   {% for tag in tag_list %}
     #
     <a href="/blog/tag/{{ tag.id }}/">{{ tag.name }}</a>
   {% endfor %}
-  <hr /> {% endcomment %}
+  <hr />
 
-  <a href="{% url 'blog:index' %}">[목록 보기]</a>
+  <a href="{% url 'blog:index' %}">[목록 보기]</a> {% endcomment %}
+
   {% comment %} <a href="{% url 'blog:update' post.id %}">[글 수정]</a>
   <a href="{% url 'blog:delete' post.id %}">[글 삭제]</a> {% endcomment %}
 {% endblock %}
