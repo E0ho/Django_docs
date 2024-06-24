@@ -2,9 +2,10 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+app_name = 'blog'
 
 urlpatterns = [
-    path('', views.index),
-    path('<int:id>', views.detail)       # URL 변수
+    path('', views.index, name='index'),
+    path('<int:id>', views.detail, name='detail')       # URL 변수
 
 ]
