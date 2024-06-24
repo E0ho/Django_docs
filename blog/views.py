@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from .models import *
 # Create your views here.
 
@@ -7,7 +7,7 @@ def index(request):
 
     context = {'posts':posts}
 
-    return render(request, context)
+    return render(request, 'blog/list.html', context)
 
 
 # URL 변수 활용
