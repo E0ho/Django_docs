@@ -1,5 +1,6 @@
 # 가상 환경
 .venv311
+.venv312
 
 
 __pycache__/
