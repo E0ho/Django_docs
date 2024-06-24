@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  프로필
+{% endblock %}
+
+{% block content %}
+  <h1>{{ user.name }} 프로필</h1>
+
+  <ul>
+    <li>이름 : {{ user.name }}</li>
+    <li>번호 : {{ profile.phone_number }}</li>
+    <li>주소 : {{ profile.address }}</li>
+  </ul>
+{% endblock %}
