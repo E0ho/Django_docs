@@ -108,3 +108,35 @@ def delete_post(request, id):
     post.delete()
 
     return redirect('blog:index')
+
+
+
+# 게시글 수정
+def update_post(request, id):
+
+    post = Post.objects.get(id = id)
+    
+    # GET -> URL 접근
+    if request.method == "GET":
+        form = PostModelForm(instance=post)
+        print(form)
+        context = {'form': form}
+        return render(request, 'blog/update_post.html', context)
+    
+
+    # POST -> 데이터 전송
+    elif request.method == "POST":
+        
+        form = PostModelForm(request.POST, instance=post)
+        
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+
+            tag = cleaned_data.pop('tag')
+            post.title = cleaned_data.get('title')
+            post.body = cleaned_data.get('body')
+
+            post.tag.set(tag)
+            post.save()
+
+        return redirect('blog:detail', post.id)
