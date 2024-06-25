@@ -97,4 +97,4 @@ def create_post(request):
             tags = cleaned_data.get('tag')
             post.tag.set(tags)
             
-            return redirect(resolve_url('blog:index'))
+            return redirect(post)
