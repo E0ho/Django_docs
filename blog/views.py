@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect, resolve_url
 from .models import *
 from .forms import *
 
@@ -71,24 +71,30 @@ def profile(request):
 
 
 
-# Django Form 객체
-def input_PostForm(request):
+def create_post(request):
     
-    # URL 방문
     if request.method == "GET":
-        forms = PostForm()
-        
-        context = {'forms':forms}
 
-        return render(request, 'blog/forms.html', context)
+        form = PostModelForm()
+        context = {'form' : form}
 
-    # 데이터 전송
+        return render(request, 'blog/create_post.html', context)
+    
     elif request.method == "POST":
-
-        title = request.POST.get('title')
-        body = request.POST.get('body')
-
-        posts = Post.objects.all()
-        posts.create(title = title, body = body)
-
-        return redirect('/admin')
+        form = PostModelForm(request.POST)
+        # 유효성 검사
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            
+            post = Post()
+            post.title = cleaned_data.get('title')
+            post.body = cleaned_data.get('body')
+            
+            # Post 객체를 먼저 저장
+            post.save()
+            
+            # Many-to-Many 필드를 set() 메서드로 설정
+            tags = cleaned_data.get('tag')
+            post.tag.set(tags)
+            
+            return redirect(resolve_url('blog:index'))

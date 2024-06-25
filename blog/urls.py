@@ -11,4 +11,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),      # 프로필 페이지
 
     path('tag/<int:id>/', views.tag_li, name='tag'),      # 태그에 해당하는 Post 목록
+
+    path('new', views.create_post, name='create'),      # 태그에 해당하는 Post 목록
 ]
