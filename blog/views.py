@@ -23,10 +23,13 @@ def index(request):
 def detail(request, id):
     post = get_object_or_404(Post, id = id)
     comments = post.comments.all()
+    tags = post.tag.all()
+
 
     context = {
         'post' : post,
-        'comments' : comments
+        'comments' : comments,
+        'tags' : tags
         }
     
     return render(request, 'blog/detail.html', context)
