@@ -85,18 +85,11 @@ def create_post(request):
         form = PostModelForm(request.POST)
         # 유효성 검사
         if form.is_valid():
-            cleaned_data = form.cleaned_data
-            
-            post = Post()
-            post.title = cleaned_data.get('title')
-            post.body = cleaned_data.get('body')
             
             # Post 객체를 먼저 저장
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
             post.save()
-            
-            # Many-to-Many 필드를 set() 메서드로 설정
-            tags = cleaned_data.get('tag')
-            post.tag.set(tags)
             
             return redirect(post)
 
@@ -119,7 +112,7 @@ def update_post(request, id):
     # GET -> URL 접근
     if request.method == "GET":
         form = PostModelForm(instance=post)
-        print(form)
+
         context = {'form': form}
         return render(request, 'blog/update_post.html', context)
     
@@ -130,13 +123,6 @@ def update_post(request, id):
         form = PostModelForm(request.POST, instance=post)
         
         if form.is_valid():
-            cleaned_data = form.cleaned_data
-
-            tag = cleaned_data.pop('tag')
-            post.title = cleaned_data.get('title')
-            post.body = cleaned_data.get('body')
-
-            post.tag.set(tag)
-            post.save()
+            form.save()
 
         return redirect('blog:detail', post.id)

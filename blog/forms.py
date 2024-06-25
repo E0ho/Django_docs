@@ -11,7 +11,7 @@ class PostForm(forms.Form):
 class PostModelForm(forms.ModelForm):
   class Meta:
     model = Post
-    fields = '__all__'
+    fields = ['title', 'body']
 
     labels = {
       'title' : '제목',

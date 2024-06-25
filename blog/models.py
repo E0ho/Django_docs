@@ -7,6 +7,7 @@ class Post(models.Model):
   title = models.CharField(max_length=250) 
   body = models.TextField()
   tag = models.ManyToManyField('Tag', blank=True)
+  ip = models.GenericIPAddressField(null=True)
 
   # Model Instance 대표 출력 값
   def __str__(self):
