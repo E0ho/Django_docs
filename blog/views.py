@@ -71,6 +71,7 @@ def profile(request):
 
 
 
+# 게시글 추가
 def create_post(request):
     
     if request.method == "GET":
@@ -98,3 +99,12 @@ def create_post(request):
             post.tag.set(tags)
             
             return redirect(post)
+
+
+# 게시글 삭제
+def delete_post(request, id):
+
+    post = Post.objects.filter(id = id)
+    post.delete()
+
+    return redirect('blog:index')

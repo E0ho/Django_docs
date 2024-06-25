@@ -12,5 +12,7 @@ urlpatterns = [
 
     path('tag/<int:id>/', views.tag_li, name='tag'),      # 태그에 해당하는 Post 목록
 
-    path('new', views.create_post, name='create'),      # 태그에 해당하는 Post 목록
+    path('create', views.create_post, name='create'),      # 생성
+    path('delete/<int:id>', views.delete_post, name='delete'),      # 삭제
+    # path('new', views.create_post, name='create'),      # 수정
 ]

@@ -15,4 +15,6 @@
   {% for post in posts %}
     <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a><br />
   {% endfor %}
+
+  <a href="{% url 'blog:create' %}">[새 글 작성]</a>
 {% endblock %}
