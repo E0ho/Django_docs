@@ -4,7 +4,14 @@ from .models import *
 
 # 메인 페이지 처리 함수 (게시판 목록)
 def index(request):
+
+    # 전체
     posts = Post.objects.all()
+
+    # 키워드 검색
+    keyword = request.GET.get('keyword')
+    if keyword:
+        posts = Post.objects.filter(title__contains = keyword)
 
     context = {'posts':posts}
 
