@@ -25,6 +25,23 @@ def detail(request, id):
     return render(request, 'blog/detail.html', context)
 
 
+def tag_li(request, id):
+
+    # tag 조회
+    tag = get_object_or_404(Tag, id=id)
+
+    # tag에 해당하는 Post 목록
+    posts = tag.post_set.all()
+
+    context = {
+        'tag': tag,
+        'posts': posts
+    }
+
+    print(context)
+    return render(request, 'blog/list.html', context)
+
+
 
 # 프로필 처리 함수
 def profile(request):
