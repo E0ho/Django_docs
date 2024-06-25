@@ -21,8 +21,7 @@
 
   <p>태그</p>
   {% for tag in tags %}
-    #
-    <a href="/blog/tag/{{ tag.id }}/">{{ tag.name }}</a>
+    <a href="{% url 'blog:tag' tag.id %}">#{{ tag.name }}</a>
   {% endfor %}
   <hr />
 
