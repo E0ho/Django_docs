@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from .models import *
-
+from .forms import *
 
 # 메인 페이지 처리 함수 (게시판 목록)
 def index(request):
@@ -63,3 +63,29 @@ def profile(request):
         }
 
     return render(request, 'blog/profile.html', context)
+
+
+
+
+
+# Django Form 객체
+def input_PostForm(request):
+    
+    # URL 방문
+    if request.method == "GET":
+        forms = PostForm()
+        
+        context = {'forms':forms}
+
+        return render(request, 'blog/forms.html', context)
+
+    # 데이터 전송
+    elif request.method == "POST":
+
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+
+        posts = Post.objects.all()
+        posts.create(title = title, body = body)
+
+        return redirect('/admin')

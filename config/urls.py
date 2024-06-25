@@ -20,4 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("blog/", include('blog.urls')),     # 블로그 APP 경로
+
+    path("form/", include('form_app.urls')),     # form 태그를 이용한 데이터 전송
 ]
