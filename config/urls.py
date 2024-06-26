@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("blog/", include('blog.urls')),     # 블로그 APP 경로
+    path("book/", include('book.urls')),     # Book APP 경로 (Genreic View 실습)
 ]
