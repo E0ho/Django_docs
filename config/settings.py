@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "blog",
     "db_test",
-    "book"
+    "book",
+    "gallery"
 ]
 
 MIDDLEWARE = [
@@ -118,9 +119,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+import os 
+
+# Static 파일 접근 URL
+STATIC_URL = '/static/'
+
+# Django 서버에서 접근하는 Static 파일 경로
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, 'config', 'static'),
+]
+
+# 실제 서버에서 접근하는 Static 파일 경로
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
